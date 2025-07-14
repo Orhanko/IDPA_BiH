@@ -20,7 +20,7 @@ class EventDetailScreen extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              elevation: 16,
+              elevation: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -32,48 +32,218 @@ class EventDetailScreen extends StatelessWidget {
                   ),
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(8),
                     color: Theme.of(context).colorScheme.primaryContainer,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           event.name,
-                          style: Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(fontWeight: FontWeight.w500),
                         ),
-                        const SizedBox(height: 8),
-                        Text('${event.startDate} - ${event.endDate}'),
-                        Text(event.shootingRange.name),
-                        Text(event.phone),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  //POCETAK
+                  // Ovdje se pravi ostatak sadrzaja izmedju agende i naslova, po staroj aplikaciji izmedju agende i slike
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'Match Details',
-                      style: Theme.of(context).textTheme.titleMedium,
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.arrow_circle_up_outlined,
+                                    size: 16,
+
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(width: 4),
+                                  Text(
+                                    "Tier",
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                event.tier,
+                                style: Theme.of(context).textTheme.bodyLarge
+                                    ?.copyWith(fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.calendar_month,
+                                  color: Colors.grey,
+                                  size: 16,
+                                ),
+                                SizedBox(width: 4),
+                                Text(
+                                  "Start date",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              event.startDate,
+                              style: Theme.of(context).textTheme.bodyLarge
+                                  ?.copyWith(fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.calendar_month,
+                                  color: Colors.grey,
+                                  size: 16,
+                                ),
+                                SizedBox(width: 4),
+                                Text(
+                                  "End date",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              event.endDate,
+                              style: Theme.of(context).textTheme.bodyLarge
+                                  ?.copyWith(fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'Stages: ${event.details.stages}\n'
-                      'Tier: ${event.details.tier}\n'
-                      'Match Fee: ${event.details.matchFee}',
+
+                  ListTile(
+                    title: Text(
+                      "Stages squads, results:",
+                      style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      'Agenda',
-                      style: Theme.of(context).textTheme.titleMedium,
+                    subtitle: Text(
+                      "practiscore.com",
+                      style: TextStyle(color: Colors.grey),
                     ),
+                    trailing: Icon(Icons.chevron_right, color: Colors.grey),
+                    onTap: () async {
+                      final Uri url = Uri.parse(event.practiscoreUrl);
+                      if (await canLaunchUrl(url)) {
+                        await launchUrl(
+                          url,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      } else {
+                        return;
+                      }
+                    },
                   ),
-                  ...event.agenda.map(
-                    (item) => Padding(
+                  ListTile(
+                    title: Text(
+                      "Hotel",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      event.hotel.name,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    trailing: Icon(Icons.chevron_right, color: Colors.grey),
+                    onTap: () async {
+                      if (event.hotel.placeId == "--") return;
+                      final Uri url = Uri.parse(
+                        "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${event.hotel.placeId}",
+                      );
+                      if (await canLaunchUrl(url)) {
+                        await launchUrl(
+                          url,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      } else {
+                        return;
+                      }
+                    },
+                  ),
+                  ListTile(
+                    title: Text(
+                      "Shooting range",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      event.shootingRange.name,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    trailing: Icon(Icons.chevron_right, color: Colors.grey),
+                    onTap: () async {
+                      final Uri url = Uri.parse(
+                        "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${event.shootingRange.placeId}",
+                      );
+                      if (await canLaunchUrl(url)) {
+                        await launchUrl(
+                          url,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      } else {
+                        return;
+                      }
+                    },
+                  ),
+                  ListTile(
+                    title: Text(
+                      "Contact Info",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      event.phone,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    trailing: Icon(Icons.chevron_right, color: Colors.grey),
+                    onTap: () async {
+                      final Uri telUri = Uri(
+                        scheme: 'tel',
+                        path: event.phone.replaceAll(' ', ''),
+                      );
+                      if (await canLaunchUrl(telUri)) {
+                        await launchUrl(telUri);
+                      } else {
+                        // opciono: možeš logovati error ako baš želiš
+                        print('Ne mogu pokrenuti poziv.');
+                      }
+                    },
+                  ),
+
+                  ...event.agenda.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final item = entry.value;
+                    final isFirst = index == 0;
+
+                    return Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
                         vertical: 8,
@@ -81,17 +251,39 @@ class EventDetailScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            item.name,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        isFirst
+                                            ? "Pre-match: "
+                                            : "Main match: ",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: item.name,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          ...item.infoList
-                              .map((info) => Text('• $info'))
-                              .toList(),
+                          ...item.infoList.map((info) => Text('   • $info')),
                         ],
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                   const SizedBox(height: 24),
                 ],
               ),

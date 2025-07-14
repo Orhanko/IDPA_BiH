@@ -10,7 +10,7 @@ class EventsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
-          "IDPA_BiH",
+          "All Events",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),

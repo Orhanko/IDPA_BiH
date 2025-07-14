@@ -27,17 +27,15 @@ class EventList extends StatelessWidget {
           itemBuilder: (context, index) {
             final event = events[index];
             return Card(
-              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
               elevation: 20,
               clipBehavior: Clip.antiAlias,
               child: InkWell(
-                splashColor: Colors.transparent, // onemogućava ripple
-                highlightColor: Colors.white.withAlpha(
-                  50,
-                ), // lagano bijelo prekrivanje
+                splashColor: Colors.transparent,
+                highlightColor: Colors.white.withAlpha(50),
 
                 onTap: () {
                   Navigator.of(context).push(
@@ -48,10 +46,9 @@ class EventList extends StatelessWidget {
                 },
                 child: Column(
                   children: [
-                    /// 🔥 Ovo osigurava da ripple radi preko slike!
                     Ink.image(
                       image: NetworkImage(event.imgUrl),
-                      height: 300,
+                      height: 250,
                       fit: BoxFit.cover,
                     ),
                     Ink(
@@ -89,10 +86,7 @@ class EventList extends StatelessWidget {
                                 const SizedBox(width: 6),
                                 Text(
                                   '${event.startDate} - ${event.endDate}',
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
@@ -107,10 +101,7 @@ class EventList extends StatelessWidget {
                                 const SizedBox(width: 6),
                                 Text(
                                   event.shootingRange.name,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
@@ -125,10 +116,7 @@ class EventList extends StatelessWidget {
                                 const SizedBox(width: 6),
                                 Text(
                                   event.phone,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
+                                  style: const TextStyle(color: Colors.white),
                                 ),
                               ],
                             ),
