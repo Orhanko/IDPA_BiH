@@ -17,19 +17,12 @@ class EventDetailScreen extends StatelessWidget {
             Card(
               margin: EdgeInsets.symmetric(horizontal: 8),
               clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               elevation: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.network(
-                    event.imgUrl,
-                    width: double.infinity,
-                    height: 250,
-                    fit: BoxFit.cover,
-                  ),
+                  Image.network(event.imgUrl, width: double.infinity, height: 250, fit: BoxFit.cover),
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(8),
@@ -39,8 +32,7 @@ class EventDetailScreen extends StatelessWidget {
                       children: [
                         Text(
                           event.name,
-                          style: Theme.of(context).textTheme.headlineSmall
-                              ?.copyWith(fontWeight: FontWeight.w500),
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -52,62 +44,20 @@ class EventDetailScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.arrow_circle_up_outlined,
-                                    size: 16,
-
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    "Tier",
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                event.tier,
-                                style: Theme.of(context).textTheme.bodyLarge
-                                    ?.copyWith(fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               children: [
-                                Icon(
-                                  Icons.calendar_month,
-                                  color: Colors.grey,
-                                  size: 16,
-                                ),
+                                Icon(Icons.arrow_circle_up_outlined, size: 16, color: Colors.grey),
                                 SizedBox(width: 4),
-                                Text(
-                                  "Start date",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                Text("Tier", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
                               ],
                             ),
                             SizedBox(height: 4),
                             Text(
-                              event.startDate,
-                              style: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(fontWeight: FontWeight.w500),
+                              event.tier,
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -116,26 +66,32 @@ class EventDetailScreen extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Icon(
-                                  Icons.calendar_month,
-                                  color: Colors.grey,
-                                  size: 16,
-                                ),
+                                Icon(Icons.calendar_month, color: Colors.grey, size: 16),
                                 SizedBox(width: 4),
-                                Text(
-                                  "End date",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
+                                Text("Start date", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              event.startDate,
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(Icons.calendar_month, color: Colors.grey, size: 16),
+                                SizedBox(width: 4),
+                                Text("End date", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
                               ],
                             ),
                             SizedBox(height: 4),
                             Text(
                               event.endDate,
-                              style: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(fontWeight: FontWeight.w500),
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),
@@ -144,36 +100,21 @@ class EventDetailScreen extends StatelessWidget {
                   ),
 
                   ListTile(
-                    title: Text(
-                      "Stages squads, results:",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    subtitle: Text(
-                      "practiscore.com",
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    title: Text("Stages squads, results:", style: TextStyle(fontWeight: FontWeight.w500)),
+                    subtitle: Text("practiscore.com", style: TextStyle(color: Colors.grey)),
                     trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     onTap: () async {
                       final Uri url = Uri.parse(event.practiscoreUrl);
                       if (await canLaunchUrl(url)) {
-                        await launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
-                        );
+                        await launchUrl(url, mode: LaunchMode.externalApplication);
                       } else {
                         return;
                       }
                     },
                   ),
                   ListTile(
-                    title: Text(
-                      "Hotel",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    subtitle: Text(
-                      event.hotel.name,
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    title: Text("Hotel", style: TextStyle(fontWeight: FontWeight.w500)),
+                    subtitle: Text(event.hotel.name, style: TextStyle(color: Colors.grey)),
                     trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     onTap: () async {
                       if (event.hotel.placeId == "--") return;
@@ -181,54 +122,33 @@ class EventDetailScreen extends StatelessWidget {
                         "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${event.hotel.placeId}",
                       );
                       if (await canLaunchUrl(url)) {
-                        await launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
-                        );
+                        await launchUrl(url, mode: LaunchMode.externalApplication);
                       } else {
                         return;
                       }
                     },
                   ),
                   ListTile(
-                    title: Text(
-                      "Shooting range",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    subtitle: Text(
-                      event.shootingRange.name,
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    title: Text("Shooting range", style: TextStyle(fontWeight: FontWeight.w500)),
+                    subtitle: Text(event.shootingRange.name, style: TextStyle(color: Colors.grey)),
                     trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     onTap: () async {
                       final Uri url = Uri.parse(
                         "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${event.shootingRange.placeId}",
                       );
                       if (await canLaunchUrl(url)) {
-                        await launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
-                        );
+                        await launchUrl(url, mode: LaunchMode.externalApplication);
                       } else {
                         return;
                       }
                     },
                   ),
                   ListTile(
-                    title: Text(
-                      "Contact Info",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    subtitle: Text(
-                      event.phone,
-                      style: TextStyle(color: Colors.grey),
-                    ),
+                    title: Text("Contact Info", style: TextStyle(fontWeight: FontWeight.w500)),
+                    subtitle: Text(event.phone, style: TextStyle(color: Colors.grey)),
                     trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     onTap: () async {
-                      final Uri telUri = Uri(
-                        scheme: 'tel',
-                        path: event.phone.replaceAll(' ', ''),
-                      );
+                      final Uri telUri = Uri(scheme: 'tel', path: event.phone.replaceAll(' ', ''));
                       if (await canLaunchUrl(telUri)) {
                         await launchUrl(telUri);
                       } else {
@@ -244,10 +164,7 @@ class EventDetailScreen extends StatelessWidget {
                     final isFirst = index == 0;
 
                     return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -257,23 +174,12 @@ class EventDetailScreen extends StatelessWidget {
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text:
-                                        isFirst
-                                            ? "Pre-match: "
-                                            : "Main match: ",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                    ),
+                                    text: isFirst ? "Pre-match: " : "Main match: ",
+                                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 16),
                                   ),
                                   TextSpan(
                                     text: item.name,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                    ),
+                                    style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black, fontSize: 16),
                                   ),
                                 ],
                               ),
@@ -307,14 +213,9 @@ class EventDetailScreen extends StatelessWidget {
                     final url = Uri.parse(event.visitSuggestion.visitUrl);
 
                     if (await canLaunchUrl(url)) {
-                      await launchUrl(
-                        url,
-                        mode: LaunchMode.externalApplication,
-                      );
+                      await launchUrl(url, mode: LaunchMode.externalApplication);
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Could not launch URL')),
-                      );
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Could not launch URL')));
                     }
                   },
                   child: Stack(
@@ -326,11 +227,7 @@ class EventDetailScreen extends StatelessWidget {
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
-                      Container(
-                        height: 180,
-                        width: double.infinity,
-                        color: Colors.white.withAlpha(130),
-                      ),
+                      Container(height: 180, width: double.infinity, color: Colors.white.withAlpha(130)),
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
@@ -339,13 +236,7 @@ class EventDetailScreen extends StatelessWidget {
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                offset: Offset(3, 5),
-                                blurRadius: 8,
-                                color: Colors.black54,
-                              ),
-                            ],
+                            shadows: [Shadow(offset: Offset(3, 5), blurRadius: 8, color: Colors.black54)],
                           ),
                           textAlign: TextAlign.center,
                         ),
