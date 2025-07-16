@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class EventModel {
   final String name;
   final String startDate;
@@ -7,6 +9,7 @@ class EventModel {
   final String imgUrl;
   final String practiscoreUrl;
   final Details details;
+  final bool payment;
   final Hotel hotel;
   final ShootingRange shootingRange;
   final VisitSuggestion visitSuggestion;
@@ -25,6 +28,7 @@ class EventModel {
     required this.shootingRange,
     required this.visitSuggestion,
     required this.agenda,
+    required this.payment,
   });
 
   factory EventModel.fromJson(Map<String, dynamic> json) {
@@ -35,15 +39,13 @@ class EventModel {
       tier: json['tier'],
       phone: json['phone'],
       imgUrl: json['imgUrl'],
+      payment: json['payment'] ?? false,
       practiscoreUrl: json['practiscoreUrl'],
       details: Details.fromJson(json['details']),
       hotel: Hotel.fromJson(json['hotel']),
       shootingRange: ShootingRange.fromJsoncic(json['shootingRange']),
       visitSuggestion: VisitSuggestion.fromJson(json['visitSuggestion']),
-      agenda:
-          (json['agenda'] as List)
-              .map((item) => AgendaItem.fromJson(item))
-              .toList(),
+      agenda: (json['agenda'] as List).map((item) => AgendaItem.fromJson(item)).toList(),
     );
   }
 }
@@ -56,11 +58,7 @@ class AgendaItem {
   AgendaItem({required this.name, required this.title, required this.infoList});
 
   factory AgendaItem.fromJson(Map<String, dynamic> json) {
-    return AgendaItem(
-      name: json['name'],
-      title: json['title'],
-      infoList: List<String>.from(json['infoList']),
-    );
+    return AgendaItem(name: json['name'], title: json['title'], infoList: List<String>.from(json['infoList']));
   }
 }
 
@@ -113,12 +111,7 @@ class ShootingRange {
   final String placeId;
   final Location location;
 
-  ShootingRange({
-    required this.name,
-    required this.address,
-    required this.placeId,
-    required this.location,
-  });
+  ShootingRange({required this.name, required this.address, required this.placeId, required this.location});
 
   factory ShootingRange.fromJsoncic(Map<String, dynamic> json) {
     return ShootingRange(
@@ -146,17 +139,9 @@ class VisitSuggestion {
   final String imageUrl;
   final String visitUrl;
 
-  VisitSuggestion({
-    required this.name,
-    required this.imageUrl,
-    required this.visitUrl,
-  });
+  VisitSuggestion({required this.name, required this.imageUrl, required this.visitUrl});
 
   factory VisitSuggestion.fromJson(Map<String, dynamic> json) {
-    return VisitSuggestion(
-      name: json['name'],
-      imageUrl: json['imageUrl'],
-      visitUrl: json['visitUrl'],
-    );
+    return VisitSuggestion(name: json['name'], imageUrl: json['imageUrl'], visitUrl: json['visitUrl']);
   }
 }

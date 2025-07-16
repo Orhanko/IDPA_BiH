@@ -11,12 +11,16 @@ class EventDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('eventDetails'.tr())),
+      appBar: AppBar(
+        title: Text('eventDetails'.tr(), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Card(
-              margin: EdgeInsets.symmetric(horizontal: 8),
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
               elevation: 2,
@@ -194,7 +198,33 @@ class EventDetailScreen extends StatelessWidget {
                       ),
                     );
                   }),
-                  const SizedBox(height: 24),
+
+                  if (event.payment)
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        child: Theme(
+                          data: Theme.of(context).copyWith(
+                            splashFactory: NoSplash.splashFactory,
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                          ),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              print('Clicked');
+                            },
+                            icon: const Icon(Icons.payment, size: 20),
+                            label: const Text('Pay Now', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(context).colorScheme.primary,
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
