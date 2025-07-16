@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:idpa_bih/models/models.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,7 +11,7 @@ class EventDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Event Details")),
+      appBar: AppBar(title: Text('eventDetails'.tr())),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -51,7 +52,7 @@ class EventDetailScreen extends StatelessWidget {
                               children: [
                                 Icon(Icons.arrow_circle_up_outlined, size: 16, color: Colors.grey),
                                 SizedBox(width: 4),
-                                Text("Tier", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
+                                Text('tier'.tr(), style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
                               ],
                             ),
                             SizedBox(height: 4),
@@ -68,7 +69,10 @@ class EventDetailScreen extends StatelessWidget {
                               children: [
                                 Icon(Icons.calendar_month, color: Colors.grey, size: 16),
                                 SizedBox(width: 4),
-                                Text("Start date", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
+                                Text(
+                                  'startDate'.tr(),
+                                  style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                                ),
                               ],
                             ),
                             SizedBox(height: 4),
@@ -85,7 +89,7 @@ class EventDetailScreen extends StatelessWidget {
                               children: [
                                 Icon(Icons.calendar_month, color: Colors.grey, size: 16),
                                 SizedBox(width: 4),
-                                Text("End date", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
+                                Text('endDate'.tr(), style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
                               ],
                             ),
                             SizedBox(height: 4),
@@ -100,7 +104,7 @@ class EventDetailScreen extends StatelessWidget {
                   ),
 
                   ListTile(
-                    title: Text("Stages squads, results:", style: TextStyle(fontWeight: FontWeight.w500)),
+                    title: Text('stagesResults'.tr(), style: TextStyle(fontWeight: FontWeight.w500)),
                     subtitle: Text("practiscore.com", style: TextStyle(color: Colors.grey)),
                     trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     onTap: () async {
@@ -113,7 +117,7 @@ class EventDetailScreen extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    title: Text("Hotel", style: TextStyle(fontWeight: FontWeight.w500)),
+                    title: Text('hotel'.tr(), style: TextStyle(fontWeight: FontWeight.w500)),
                     subtitle: Text(event.hotel.name, style: TextStyle(color: Colors.grey)),
                     trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     onTap: () async {
@@ -129,7 +133,7 @@ class EventDetailScreen extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    title: Text("Shooting range", style: TextStyle(fontWeight: FontWeight.w500)),
+                    title: Text('shootingRange'.tr(), style: TextStyle(fontWeight: FontWeight.w500)),
                     subtitle: Text(event.shootingRange.name, style: TextStyle(color: Colors.grey)),
                     trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     onTap: () async {
@@ -144,7 +148,7 @@ class EventDetailScreen extends StatelessWidget {
                     },
                   ),
                   ListTile(
-                    title: Text("Contact Info", style: TextStyle(fontWeight: FontWeight.w500)),
+                    title: Text("contactInfo".tr(), style: TextStyle(fontWeight: FontWeight.w500)),
                     subtitle: Text(event.phone, style: TextStyle(color: Colors.grey)),
                     trailing: Icon(Icons.chevron_right, color: Colors.grey),
                     onTap: () async {
@@ -231,7 +235,8 @@ class EventDetailScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: Text(
-                          "Explore ${event.visitSuggestion.name}",
+                          'explore'.tr(args: [event.visitSuggestion.name]),
+                          // "Explore ${event.visitSuggestion.name}",
                           style: const TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.bold,

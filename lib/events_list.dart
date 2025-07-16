@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:idpa_bih/event_detail_screen.dart';
 import 'package:idpa_bih/models/models.dart';
@@ -33,8 +34,11 @@ class EventList extends StatelessWidget {
 
         return ListView(
           children: [
-            StickyHeader(header: _buildHeader("Upcoming Events", context), content: _buildEventList(upcoming, context)),
-            StickyHeader(header: _buildHeader("Past Events", context), content: _buildEventList(past, context)),
+            StickyHeader(
+              header: _buildHeader('upcomingEvents'.tr(), context),
+              content: _buildEventList(upcoming, context),
+            ),
+            StickyHeader(header: _buildHeader('pastEvents'.tr(), context), content: _buildEventList(past, context)),
           ],
         );
       },
