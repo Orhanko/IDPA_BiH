@@ -1,10 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:idpa_bih/event_detail_screen.dart';
+import 'package:idpa_bih/screens/event_detail_screen.dart';
 import 'package:idpa_bih/models/models.dart';
 import 'package:idpa_bih/services/event_service.dart';
 import 'package:sticky_headers/sticky_headers.dart';
-import 'package:intl/intl.dart';
 
 class EventList extends StatelessWidget {
   EventList({super.key});

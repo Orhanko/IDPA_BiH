@@ -25,5 +25,11 @@
   "startDate": "Data di inizio",
   "tier": "Livello",
   "upcomingEvents": "Prossimi eventi",
-  "visit": "Visita"
+  "visit": "Visita",
+  "payNow": "Paga ora",
+  "paymentSuccessful": "Pagamento riuscito",
+	"paymentFailed": "Pagamento non riuscito",
+  "paymentSuccessfulMessage": "Il pagamento è stato completato con successo. Grazie!",
+  "paymentFailedMessage": "Si è verificato un errore durante l’elaborazione del pagamento. Riprova.",
+  "ok": "Va bene"
 }

@@ -25,5 +25,11 @@
   "startDate": "Başlangıç tarihi",
   "tier": "Seviye",
   "upcomingEvents": "Yaklaşan Etkinlikler",
-  "visit": "Ziyaret et"
+  "visit": "Ziyaret et",
+  "payNow": "Şimdi öde",
+  "paymentSuccessful": "Ödeme başarılı",
+  "paymentFailed": "Ödeme başarısız",
+  "paymentSuccessfulMessage": "Ödeme başarıyla tamamlandı. Teşekkür ederiz!",
+  "paymentFailedMessage": "Ödeme işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.",
+  "ok": "Tamam"
 }

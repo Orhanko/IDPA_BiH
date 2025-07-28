@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:idpa_bih/events_list.dart';
+import 'package:idpa_bih/widgets/events_list.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class EventsScreen extends StatelessWidget {
@@ -20,11 +20,7 @@ class EventsScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.onSecondaryFixedVariant,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: SizedBox(
-                width: 24,
-                height: 24,
-                child: getFlagForLocale(context.locale), // npr. BosnianIcon() ili slično
-              ),
+              child: SizedBox(width: 24, height: 24, child: getFlagForLocale(context.locale)),
             ),
             onPressed: () {
               showDialog(

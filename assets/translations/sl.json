@@ -25,5 +25,11 @@
   "startDate": "Datum začetka",
   "tier": "Raven",
   "upcomingEvents": "Prihajajoči dogodki",
-  "visit": "Obisk"
+  "visit": "Obisk",
+  "payNow": "Plačaj zdaj",
+  "paymentSuccessful": "Plačilo je uspelo",
+  "paymentFailed": "Plačilo ni uspelo",
+  "paymentSuccessfulMessage": "Plačilo je bilo uspešno izvedeno. Hvala!",
+  "paymentFailedMessage": "Pri obdelavi plačila je prišlo do napake. Poskusite znova.",
+  "ok": "V redu"
 }

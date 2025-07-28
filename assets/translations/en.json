@@ -25,5 +25,11 @@
   "startDate": "Start date",
   "tier": "Tier",
   "upcomingEvents": "Upcoming Events",
-  "visit": "Visit"
+  "visit": "Visit",
+  "payNow": "Pay Now",
+  "paymentSuccessful": "Payment Successful",
+  "paymentFailed": "Payment failed",
+  "paymentSuccessfulMessage": "The payment was successfully completed. Thank you!",
+  "paymentFailedMessage": "An error occurred while processing the payment. Please try again.",
+  "ok": "OK"
 }

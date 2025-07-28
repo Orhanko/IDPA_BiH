@@ -25,5 +25,11 @@
   "startDate": "Kezdés dátuma",
   "tier": "Szint",
   "upcomingEvents": "Közelgő események",
-  "visit": "Látogatás"
+  "visit": "Látogatás",
+  "payNow": "Fizess most",
+  "paymentSuccessful": "Sikeres fizetés",
+	"paymentFailed": "Sikertelen fizetés",
+  "paymentSuccessfulMessage": "A fizetés sikeresen megtörtént. Köszönjük!",
+  "paymentFailedMessage": "Hiba történt a fizetés feldolgozása során. Kérjük, próbálja meg újra.",
+  "ok": "Rendben"
 }

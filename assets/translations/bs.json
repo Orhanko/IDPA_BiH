@@ -25,5 +25,11 @@
   "startDate": "Datum početka",
   "tier": "Razina",
   "upcomingEvents": "Nadolazeći događaji",
-  "visit": "Posjet"
+  "visit": "Posjet",
+  "payNow": "Plati odmah",
+  "paymentSuccessful": "Uplata uspješna",
+  "paymentFailed": "Uplata nije uspjela",
+  "paymentSuccessfulMessage": "Uplata je uspješno izvršena. Hvala!",
+  "paymentFailedMessage": "Došlo je do greške prilikom obrade uplate. Pokušajte ponovo.",
+  "ok": "U redu"
 }

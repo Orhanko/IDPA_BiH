@@ -2,9 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:idpa_bih/models/models.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:idpa_bih/services/monri_payment_service.dart';
+
+const authenticityToken = '4bafba17eee548ca5e90c7ebdabf8ed690fb5e39';
+const clientKey = 'key-6dcb2c7a0f7ea93166e92671ecd63b45';
 
 class EventDetailScreen extends StatelessWidget {
   final EventModel event;
+  static final String orderId = 'ORD-${DateTime.now().millisecondsSinceEpoch}';
 
   const EventDetailScreen({super.key, required this.event});
 
@@ -42,71 +47,97 @@ class EventDetailScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  //POCETAK
-                  // Ovdje se pravi ostatak sadrzaja izmedju agende i naslova, po staroj aplikaciji izmedju agende i slike
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.arrow_circle_up_outlined, size: 16, color: Colors.grey),
-                                SizedBox(width: 4),
-                                Text('tier'.tr(), style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
-                              ],
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              event.tier,
-                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
-                            ),
-                          ],
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(Icons.arrow_circle_up_outlined, size: 16, color: Colors.grey),
+                                  SizedBox(width: 4),
+                                  Flexible(
+                                    child: Text(
+                                      'tier'.tr(),
+                                      style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                event.tier,
+                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.calendar_month, color: Colors.grey, size: 16),
-                                SizedBox(width: 4),
-                                Text(
-                                  'startDate'.tr(),
-                                  style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              event.startDate,
-                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
-                            ),
-                          ],
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(Icons.calendar_month, color: Colors.grey, size: 16),
+                                  SizedBox(width: 4),
+                                  Flexible(
+                                    child: Text(
+                                      'startDate'.tr(),
+                                      style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                event.startDate,
+                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.calendar_month, color: Colors.grey, size: 16),
-                                SizedBox(width: 4),
-                                Text('endDate'.tr(), style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
-                              ],
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              event.endDate,
-                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
-                            ),
-                          ],
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Icon(Icons.calendar_month, color: Colors.grey, size: 16),
+                                  SizedBox(width: 4),
+                                  Flexible(
+                                    child: Text(
+                                      'endDate'.tr(),
+                                      style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w500),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                event.endDate,
+                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-
                   ListTile(
                     title: Text('stagesResults'.tr(), style: TextStyle(fontWeight: FontWeight.w500)),
                     subtitle: Text("practiscore.com", style: TextStyle(color: Colors.grey)),
@@ -159,9 +190,6 @@ class EventDetailScreen extends StatelessWidget {
                       final Uri telUri = Uri(scheme: 'tel', path: event.phone.replaceAll(' ', ''));
                       if (await canLaunchUrl(telUri)) {
                         await launchUrl(telUri);
-                      } else {
-                        // opciono: možeš logovati error ako baš želiš
-                        print('Ne mogu pokrenuti poziv.');
                       }
                     },
                   ),
@@ -210,11 +238,20 @@ class EventDetailScreen extends StatelessWidget {
                             splashColor: Colors.transparent,
                           ),
                           child: ElevatedButton.icon(
-                            onPressed: () {
-                              print('Clicked');
+                            onPressed: () async {
+                              try {
+                                await launchMonriPayment(
+                                  authenticityToken: "4bafba17eee548ca5e90c7ebdabf8ed690fb5e39",
+                                  clientKey: "key-6dcb2c7a0f7ea93166e92671ecd63b45",
+                                  eventName: event.name,
+                                  amountCents: 1000,
+                                );
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                              }
                             },
                             icon: const Icon(Icons.payment, size: 20),
-                            label: const Text('Pay Now', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                            label: Text('payNow'.tr(), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Theme.of(context).colorScheme.primary,
                               foregroundColor: Colors.white,
@@ -228,16 +265,6 @@ class EventDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // Container(
-            //   margin: EdgeInsets.symmetric(horizontal: 8, vertical: 24),
-            //   height: 200,
-            //   width: double.infinity,
-
-            //   decoration: BoxDecoration(
-            //     color: Colors.amber,
-            //     borderRadius: BorderRadius.circular(16),
-            //   ),
-            // ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: ClipRRect(
@@ -266,7 +293,6 @@ class EventDetailScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(16),
                         child: Text(
                           'explore'.tr(args: [event.visitSuggestion.name]),
-                          // "Explore ${event.visitSuggestion.name}",
                           style: const TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
