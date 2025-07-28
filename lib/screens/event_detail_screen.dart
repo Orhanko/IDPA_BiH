@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:idpa_bih/models/models.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:idpa_bih/services/monri_payment_service.dart';
@@ -241,8 +242,8 @@ class EventDetailScreen extends StatelessWidget {
                             onPressed: () async {
                               try {
                                 await launchMonriPayment(
-                                  authenticityToken: "4bafba17eee548ca5e90c7ebdabf8ed690fb5e39",
-                                  clientKey: "key-6dcb2c7a0f7ea93166e92671ecd63b45",
+                                  authenticityToken: dotenv.env['AUTH_TOKEN']!,
+                                  clientKey: dotenv.env['CLIENT_KEY']!,
                                   eventName: event.name,
                                   amountCents: 1000,
                                 );
